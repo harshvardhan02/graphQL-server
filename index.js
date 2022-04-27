@@ -1,8 +1,12 @@
 const { ApolloServer, gql } = require("apollo-server");
 
+// Scaler type:- String, Int, Float, Boolean, ID
 const typeDefs = gql`
   type Query {
-    hello: String
+    hello: String,
+    numberOfAnimals: Int,
+    price: Float,
+    isTrue: Boolean,
   }
 `;
 
@@ -11,6 +15,15 @@ const resolvers = {
     hello: () => {
       return "Harshvardhan";
     },
+    numberOfAnimals: () => {
+      return 100;
+    },
+    price: () => {
+      return 100.12;
+    },
+    isTrue: () => {
+      return true;
+    }
   },
 };
 
