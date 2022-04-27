@@ -10,7 +10,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: () => {
-      return ["Harshvardhan", "Kumar", "Singh"];
+      return ["Harshvardhan", "Singh", "Baghel"];
       // return ["Harshvardhan", null, "Singh"];
     },
   },
