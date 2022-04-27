@@ -98,6 +98,7 @@ const typeDefs = gql`
 
   # object types have scaler types properties
   type Product {
+    id: ID!
     name: String! # ! means it is required(non-nullable)
     description: String!
     quantity: Int!
