@@ -82,6 +82,21 @@ const allProducts = [{
   "onSale": true
 }]
 
+const categories = [
+  {
+    id: "c01b1ff4-f894-4ef2-b27a-22aacc2fca70",
+    name: "Kitchen",
+  },
+  {
+    id: "34115aac-0ff5-4859-8f43-10e8db23602b",
+    name: "Garden",
+  },
+  {
+    id: "d914aec0-25b2-4103-9ed8-225d39018d1d",
+    name: "Sports",
+  },
+];
+
 // write below query to get specific data from array of objects
 // query {
 //   products {
@@ -94,6 +109,8 @@ const typeDefs = gql`
     hello: [String],
     products: [Product!]!
     product(id: Int!): Product
+    categories: [Category!]!
+    category(id: ID!): Category
   }
 
   # object types have scaler types properties
@@ -105,6 +122,11 @@ const typeDefs = gql`
     price: Float!
     onSale: Boolean!
   }
+
+  type Category {
+    id: ID!
+    name: String!
+  }
 `;
 
 const resolvers = {
@@ -112,14 +134,16 @@ const resolvers = {
     hello: () => {
       return ["Harshvardhan", "Singh", "Baghel"];
     },
-    products: () => products,
+    products: () => allProducts,
     // resolver has 3 parameters parent, args and context
     product: (parent, args, context) => {
-      const productId = args.id;
-      console.log(allProducts.find(product => product.id === productId))
-      const product = allProducts.find(product => product.id === productId);
-      if (!product) return null;
-      return product;
+      const { id } = args;
+      return product = allProducts.find(product => product.id === id);
+    },
+    categories: () => categories,
+    category: (parent, args, context) => {
+      const { id } = args;
+      return categories.find(category => category.id === id);
     }
   },
 };
