@@ -1,7 +1,6 @@
-const { allProducts } = require("../db");
-
 exports.Category = {
   products: (parent, args, context) => {
+    const { allProducts } = context;
     const { id } = parent;
     return allProducts.filter(product => product.categoryID === id);
   }
