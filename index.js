@@ -1,5 +1,5 @@
 const { ApolloServer } = require("apollo-server");
-const { allProducts, categories } = require("./db");
+const { allProducts, categories, reviews } = require("./db");
 const { typeDefs } = require("./schema");
 const { Query } = require("./resolvers/Query");
 const { Product } = require("./resolvers/Product");
@@ -32,7 +32,8 @@ const server = new ApolloServer({
   },
   context: {
     allProducts,
-    categories
+    categories,
+    reviews
   }
 });
 
