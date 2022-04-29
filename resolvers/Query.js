@@ -3,13 +3,30 @@ exports.Query = {
     return ["Harshvardhan", "Singh", "Baghel"];
   },
   products: (parent, args, context) => {
-    const { allProducts } = context;
+    const { allProducts, reviews } = context;
     const { filter } = args;
     let filterProduct = allProducts;
     if (filter) {
-      if (filter.onSale === true) {
+      const { onSale, avgRating } = filter;
+      if (onSale === true) {
         filterProduct = allProducts.filter(product => {
           return product.onSale
+        });
+      }
+      if ([1, 2, 3, 4, 5].includes(avgRating)) {
+        filterProduct = allProducts.filter(product => {
+          let sumRating = 0;
+          let numberOfReviews = 0;
+
+          reviews.forEach(review => {
+            if (review.productId === product.id) {
+              sumRating += review.rating;
+              numberOfReviews++;
+            }
+          });
+          const avgProductRating = sumRating / numberOfReviews;
+          console.log(numberOfReviews)
+          return avgProductRating >= avgRating;
         });
       }
     }
@@ -21,6 +38,19 @@ exports.Query = {
   //     onSale
   //   }
   // }
+
+  // query {
+  //   products(filter: {
+  //     onSale: true
+  //     avgRating: 4
+  //   }) {
+  //     name
+  //     price
+  //     onSale
+  //   }
+  // }
+
+
   // resolver has 3 parameters parent, args and context
   product: (parent, args, context) => {
     const { allProducts } = context;
