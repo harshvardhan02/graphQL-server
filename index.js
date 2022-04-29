@@ -4,6 +4,7 @@ const { typeDefs } = require("./schema");
 const { Query } = require("./resolvers/Query");
 const { Product } = require("./resolvers/Product");
 const { Category } = require("./resolvers/Category");
+const { Mutation } = require("./resolvers/Mutation");
 // query for getting one object
 // query {
 //   product(id: 1) {
@@ -28,7 +29,8 @@ const server = new ApolloServer({
   resolvers: {
     Query,
     Product,
-    Category
+    Category,
+    Mutation
   },
   context: {
     allProducts,

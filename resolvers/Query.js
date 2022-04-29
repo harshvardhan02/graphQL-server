@@ -57,7 +57,10 @@ exports.Query = {
     const { id } = args;
     return product = allProducts.find(product => product.id === id);
   },
-  categories: () => categories,
+  categories: (parent, args, context) => {
+    const { categories } = context;
+    return categories;
+  },
   category: (parent, args, context) => {
     const { categories } = context;
     const { id } = args;

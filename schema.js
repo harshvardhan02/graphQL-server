@@ -8,6 +8,10 @@ exports.typeDefs = gql`
     category(id: ID!): Category
   }
 
+  type Mutation {
+    addCategory(input: AddCategoryInput!): Category!
+  }
+
   # object types have scaler types properties
   type Product {
     id: ID!
@@ -37,5 +41,9 @@ exports.typeDefs = gql`
   input ProductsFilterInput {
     onSale: Boolean
     avgRating: Int
+  }
+
+  input AddCategoryInput {
+    name: String!
   }
 `;
