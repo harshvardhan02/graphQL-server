@@ -4,8 +4,23 @@ exports.Query = {
   },
   products: (parent, args, context) => {
     const { allProducts } = context;
-    return allProducts;
+    const { filter } = args;
+    let filterProduct = allProducts;
+    if (filter) {
+      if (filter.onSale === true) {
+        filterProduct = allProducts.filter(product => {
+          return product.onSale
+        });
+      }
+    }
+    return filterProduct;
   },
+  // query {
+  //   products(filter: { onSale: true }) {
+  //     name
+  //     onSale
+  //   }
+  // }
   // resolver has 3 parameters parent, args and context
   product: (parent, args, context) => {
     const { allProducts } = context;

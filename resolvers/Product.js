@@ -10,3 +10,15 @@ exports.Product = {
     return reviews.filter(review => review.productID === productID);
   }
 }
+// query {
+//   product(id: 1) {
+//     name
+//     description
+//     onSale
+//     reviews {
+//       title
+//       comment
+//       rating
+//     }
+//   }
+// }  
